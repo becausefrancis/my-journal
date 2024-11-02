@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= entry.month %> / <%= entry.day %></title>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <% 
+    const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const monthName = months[entry.month - 1];
+  %>
+  <h1><%= monthName %> <%= entry.day %> - <i><%= entry.weekday %></i></h1>
+
+  <h2>Goal for the Day:</h2>
+  <% if (entry.task) { %>
+      <% if (entry.isComplete) { %>
+          <p><s><%= entry.task %></s> - Completed! ⭐</p>
+      <% } else { %>
+          <p><%= entry.task %></p>
+      <% } %>
+  <% } else { %>
+      <p>There were no goals set on this day.</p>
+  <% } %>
+
+  <h2>What happened on this day?</h2>
+    <p><%= entry.journalEntry %></p>
+
+  <h2>How did this day go for you?</h2>
+    <% if (entry.status === 'positive') { %>
+        <p>This day went well for you! 😊</p>
+    <% } else if (entry.status === 'neutral') { %>
+        <p>This day was meh! 😐</p>
+    <% } else if (entry.status === 'negative') { %>
+        <p>This day was a bummer... ☹️</p>
+    <% } %>
+
+  <a href="/users/<%= user._id %>/entries/<%= entry._id %>/edit">
+    Edit this entry.
+  </a>
+
+  <form action="/users/<%= user._id %>/entries/<%= entry._id %>?_method=DELETE" method="POST">
+    <button type="submit">Delete this entry.</button>
+  </form>
+
+</body>
+</html>
