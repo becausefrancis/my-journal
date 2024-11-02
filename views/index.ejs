@@ -3,14 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
   <title>my.journal</title> 
 </head>
-<body>
-  <%- include('./partials/_navbar.ejs') %>
-  <h1>my.journal</h1>
-  <p>your right to write</p>
-  <a href="/auth/sign-up">Sign up</a>
-  <a href="/auth/sign-in">Sign in</a>
+<body class="index-body">
+  <div class="index-container">
+    <div class="text-container">
+      <h1 class="main-header">my.journal</h1>
+      <p class="subheader">Your right to write.</p>
+    </div>
+    <div class="auth-links">
+      <a class="signup-link" href="/auth/sign-up">Sign Up</a>
+      <a class="signin-link" href="/auth/sign-in">Sign In</a>
+    </div>
+  </div>
 </body>
 </html>
 

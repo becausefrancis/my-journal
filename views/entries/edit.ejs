@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
   <title>Edit: <%= entry.month %> / <%= entry.day %></title>
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
   <h1><b>Making changes on this day:</b> <%= entry.month %> / <%= entry.day %></h1>
 
+  <div class="edit-body">
   <form 
     action="/users/<%= user._id %>/entries/<%= entry._id %>?_method=PUT"
     method="POST">
@@ -64,6 +66,7 @@
 
       <button type="submit">Submit</button>
   </form>
+  </div>
 
 </body>
 </html>

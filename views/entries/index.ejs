@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
   <title>Your Entries</title>
 </head>
 <body>
-  <%- include('../partials/_navbar.ejs') %>  
-  <h1>Your Entries</h1>
-  <a href="/users/<%=user._id%>/entries/new">Add an Entry</a>
-
-  <ul>
-    <% entries.forEach((entry)=>{ %>
-      <li>
-        <a href="/users/<%= user._id %>/entries/<%= entry._id %>">
-          <%= entry.month %> / <%= entry.day %>
-        </a>
-      </li>
-    <% }) %>
-  </ul>
-
+  <%- include('../partials/_navbar.ejs') %>
+  <div class="all-apps-body">
+    <div class="all-apps-header"></div>
+      <h1>Your Entries</h1>
+      <a class="add-app-link" href="/users/<%=user._id%>/entries/new">Add an Entry</a>
+    </div>
+    <ul>
+      <% entries.forEach((entry)=>{ %>
+          <li>
+            <a href="/users/<%= user._id %>/entries/<%= entry._id %>">
+              <%= entry.month %> / <%= entry.day %>
+            </a>
+          </li>
+      <% }) %>
+    </ul>
+  </div>
 </body>
 </html>

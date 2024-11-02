@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/show.css" />
   <title><%= entry.month %> / <%= entry.day %></title>
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
+  
   <% 
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June',
@@ -15,38 +17,41 @@
 
     const monthName = months[entry.month - 1];
   %>
-  <h1><%= monthName %> <%= entry.day %> - <i><%= entry.weekday %></i></h1>
 
-  <h2>Goal for the Day:</h2>
-  <% if (entry.task) { %>
-      <% if (entry.isComplete) { %>
-          <p><s><%= entry.task %></s> - Completed! ⭐</p>
-      <% } else { %>
-          <p><%= entry.task %></p>
-      <% } %>
-  <% } else { %>
-      <p>There were no goals set on this day.</p>
-  <% } %>
-
-  <h2>What happened on this day?</h2>
-    <p><%= entry.journalEntry %></p>
-
-  <h2>How did this day go for you?</h2>
-    <% if (entry.status === 'positive') { %>
-        <p>This day went well for you! 😊</p>
-    <% } else if (entry.status === 'neutral') { %>
-        <p>This day was meh! 😐</p>
-    <% } else if (entry.status === 'negative') { %>
-        <p>This day was a bummer... ☹️</p>
+  <div class="journal-entry">
+    <div class="date">
+        <h1><%= monthName %> <%= entry.day %> - <i><%= entry.weekday %></i></h1>
+    </div>
+    <h2>Goal for the Day:</h2>
+    <% if (entry.task) { %>
+        <% if (entry.isComplete) { %>
+            <p class="completed"><s><%= entry.task %></s> - Completed! ⭐</p>
+        <% } else { %>
+            <p><%= entry.task %></p>
+        <% } %>
+    <% } else { %>
+        <p>There were no goals set on this day.</p>
     <% } %>
 
-  <a href="/users/<%= user._id %>/entries/<%= entry._id %>/edit">
-    Edit this entry.
-  </a>
+    <h2>What happened on this day?</h2>
+    <p><%= entry.journalEntry %></p>
 
-  <form action="/users/<%= user._id %>/entries/<%= entry._id %>?_method=DELETE" method="POST">
-    <button type="submit">Delete this entry.</button>
-  </form>
+    <h2>How did this day go for you?</h2>
+    <% if (entry.status === 'positive') { %>
+        <p class="status positive">This day went well for you! 😊</p>
+    <% } else if (entry.status === 'neutral') { %>
+        <p class="status neutral">This day was meh! 😐</p>
+    <% } else if (entry.status === 'negative') { %>
+        <p class="status negative">This day was a bummer... ☹️</p>
+    <% } %>
 
+    <div class="action-buttons">
+        <a class="button edit-link" href="/users/<%= user._id %>/entries/<%= entry._id %>/edit">Edit this entry.</a>
+
+        <form action="/users/<%= user._id %>/entries/<%= entry._id %>?_method=DELETE" method="POST" class="delete-form">
+        <button type="submit" class="button">Delete this entry.</button>
+        </form>
+    </div>
+  </div>
 </body>
 </html>
